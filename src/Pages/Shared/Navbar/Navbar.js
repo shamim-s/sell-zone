@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Context/Context";
 
 const Navbar = () => {
+  const {user, logOutUser} = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOutUser()
+    .then(() => {
+        toast.success("Logout Success");
+    })
+    .catch(err => {
+      console.log(err);
+      toast.error(err.message);
+    })
+  }
+
   return (
     <div >
       <div className="navbar bg-base-100">
@@ -37,7 +52,10 @@ const Navbar = () => {
                 <Link className="font-semibold">DASHBORD</Link>
               </li>
               <li>
-                <Link to={'/login'} className="font-semibold">LOGIN</Link>
+                {
+                  user?.email ? <Link onClick={handleLogout} to={'/login'} className="font-semibold">LOGOUT</Link> :
+                  <Link to={'/login'} className="font-semibold">LOGIN</Link>
+                }
               </li>
             </ul>
           </div>
@@ -59,7 +77,10 @@ const Navbar = () => {
                 <Link className="font-semibold">DASHBORD</Link>
               </li>
               <li>
-                <Link to={'/login'} className="font-semibold">LOGIN</Link>
+                {
+                  user?.email ? <Link onClick={handleLogout} to={'/login'} className="font-semibold">LOGOUT</Link> :
+                  <Link to={'/login'} className="font-semibold">LOGIN</Link>
+                }
               </li>
           </ul>
         </div>

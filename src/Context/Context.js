@@ -9,8 +9,8 @@ const Context = ({children}) => {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
 
-    const createUser = (email, password) => {
-        return createUserWithEmailAndPassword(email, password);
+    const createNewUser = (email, password) => {
+        return createUserWithEmailAndPassword(auth, email, password);
     }
 
     const updateUser = (name, image) => {
@@ -20,10 +20,10 @@ const Context = ({children}) => {
     }
 
     const loginUser = (email, password) => {
-        return signInWithEmailAndPassword(email, password);
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
-    const loggOutUser = () => {
+    const logOutUser = () => {
         return signOut(auth);
     }
 
@@ -40,10 +40,10 @@ const Context = ({children}) => {
         setUser,
         loading,
         setLoading,
-        createUser,
+        createNewUser,
         updateUser,
         loginUser,
-        loggOutUser, 
+        logOutUser, 
     };
 
     return (
