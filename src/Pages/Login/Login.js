@@ -1,9 +1,37 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Context/Context";
+import toast from "react-hot-toast";
+import Spinner from "../../Components/Spinner/Spinner";
 
 const Login = () => {
+    const {user, setUser, loginUser} =  useContext(AuthContext);
     const [viewPassword, setViewPassword] = useState(false);
+    const {register, handleSubmit, errors} = useForm();
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    
+
+    const handleLogin = data => {
+        const email = data.email;
+        const password = data.password;
+
+        setLoading(true);
+        loginUser(email, password)
+        .then(result => {
+            const user = result.user;
+            setUser(user);
+            toast.success("Login Success");
+            setLoading(false);
+            navigate('/');
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error(err.message);
+        })
+    }
   return (
     <div className="mt-10 mb-10">
       <div className="w-full max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100 mx-auto">
@@ -42,8 +70,7 @@ const Login = () => {
           <hr className="w-full dark:text-gray-400" />
         </div>
         <form
-          novalidate=""
-          action=""
+          onSubmit={handleSubmit(handleLogin)}
           className="space-y-8 ng-untouched ng-pristine ng-valid"
         >
           <div className="space-y-4">
@@ -56,6 +83,7 @@ const Login = () => {
                 name="email"
                 id="email"
                 defaultValue={''}
+                {...register('email', {required: 'User email is required'})}
                 placeholder="leroy@jenkins.com"
                 className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-sky-400"
                 data-temp-mail-org="2"
@@ -79,6 +107,7 @@ const Login = () => {
                 name="password"
                 id="password"
                 defaultValue={''}
+                {...register('password', {required: 'User password is required'})}
                 placeholder="*****"
                 className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-sky-400"
               />
@@ -93,10 +122,12 @@ const Login = () => {
             </div>
           </div>
           <button
-            type="button"
+            type="submit"
             className="btn w-full px-8 py-3 font-semibold rounded-md dark:bg-sky-400 dark:text-gray-900"
           >
-            Sign in
+            {
+                loading ? <Spinner/> : 'Sign in'
+            }
           </button>
         </form>
       </div>
