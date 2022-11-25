@@ -48,8 +48,13 @@ const Navbar = () => {
               <li>
                 <Link to={'/all_phones'} className="font-semibold">PRODUCTS</Link>
               </li>
+              {
+                user?.email && <li>
+                <Link to={'/dashbord'} className="font-semibold">DASHBORD</Link>
+              </li>
+              }
               <li>
-                <Link className="font-semibold">DASHBORD</Link>
+                <Link to={'/all_phones'} className="font-semibold">BLOGS</Link>
               </li>
               <li>
                 {
@@ -73,8 +78,13 @@ const Navbar = () => {
               <li>
                 <Link to={'/all_phones'} className="font-semibold">PRODUCTS</Link>
               </li>
+              {
+                user?.email && <li>
+                <Link to={'/dashbord'} className="font-semibold">DASHBORD</Link>
+              </li>
+              }
               <li>
-                <Link className="font-semibold">DASHBORD</Link>
+                <Link to={'/all_phones'} className="font-semibold">BLOGS</Link>
               </li>
               <li>
                 {

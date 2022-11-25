@@ -1,4 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import AddProduct from "../Dashbord/AddProduct/AddProduct";
+import AllSeller from "../Dashbord/AllSeller/AllSeller";
+import AllUser from "../Dashbord/AllUser/AllUser";
+import Cart from "../Dashbord/Cart/Cart";
+import MyProducts from "../Dashbord/MyProducts/MyProducts";
+import Reports from "../Dashbord/Reports/Reports";
+import DashbordLayout from "../Layout/DashbordLayout";
 import Main from "../Layout/Main";
 import AllPhones from "../Pages/AllPhones/AllPhones";
 import CatagoryPhones from "../Pages/CatagoryPhones/CatagoryPhones";
@@ -7,6 +14,8 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import PhoneDetails from "../Pages/PhoneDetails/PhoneDetails";
 import Register from "../Pages/Register/Register";
+import AdminRoutes from "./AdminRoutes";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -30,7 +39,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/catagory/:cataId',
-                element: <CatagoryPhones/>,
+                element: <PrivateRoutes><CatagoryPhones/></PrivateRoutes>,
                 loader: ({params}) => 
                 fetch(`http://localhost:5000/phones/${params.cataId}`)
             },
@@ -41,6 +50,48 @@ export const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register/>
+            },
+        ]
+    },
+    {
+        path:'/dashbord',
+        element: <DashbordLayout/>,
+        children: [
+            {
+                path:'/dashbord',
+                element: <PrivateRoutes><Cart/></PrivateRoutes>
+            },
+            {
+                path:'/dashbord/add_product',
+                element: <PrivateRoutes><AddProduct/></PrivateRoutes>
+            },
+            {
+                path:'/dashbord/my_product',
+                element: <PrivateRoutes><MyProducts/></PrivateRoutes>
+            },
+            {
+                path:'/dashbord/reports',
+                element: <PrivateRoutes>
+                    <AdminRoutes>
+                        <Reports/>
+                    </AdminRoutes>
+                    </PrivateRoutes>
+            },
+            {
+                path:'/dashbord/all_users',
+                element: <PrivateRoutes>
+                    <AdminRoutes>
+                        <AllUser/>
+                    </AdminRoutes>
+                    </PrivateRoutes>
+            },
+            {
+                path:'/dashbord/all_sellers',
+                element: <PrivateRoutes>
+                    <AdminRoutes>
+                        <AllSeller/>
+                    </AdminRoutes>
+                    </PrivateRoutes>
             },
         ]
     }

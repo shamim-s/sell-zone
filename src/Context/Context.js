@@ -12,24 +12,29 @@ const Context = ({children}) => {
     const [loading, setLoading] = useState(true);
 
     const createNewUser = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     const updateUser = (name, image) => {
+        setLoading(true);
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: image
         });
     }
 
     const loginUser = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
     const logOutUser = () => {
+        setLoading(true);
         return signOut(auth);
     }
 
     const googleSignin = () => {
+        setLoading(true);
         return signInWithPopup(auth, googleProvider);
     }
 
@@ -37,6 +42,7 @@ const Context = ({children}) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
+            setLoading(false);
         })
 
         return () => unsubscribe;
