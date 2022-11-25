@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const CatagoryCard = ({ catagory }) => {
   return (
-    <Link>
+    <Link to={`/catagory/${catagory.cataId}`}>
       <div className="card lg:w-96 h-56 bg-base-100 shadow-xl relative">
         <div 
         className="bg-slate-900 w-full h-full text-white flex justify-center items-center absolute opacity-0 hover:opacity-70 transition-all rounded-xl">

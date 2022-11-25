@@ -13,7 +13,7 @@ const OurProducts = () => {
     })
     return (
         <div>
-            <h1 className='text-2xl font-bold'>OUR PRODUCTS</h1>
+            <h1 className='text-2xl font-bold lg:text-left md:text-left text-center'>OUR PRODUCTS</h1>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-6'>
                 {
                     phones.slice(0,3).map(phone => <ProductCard key={phone._id} phone={phone}/>)
