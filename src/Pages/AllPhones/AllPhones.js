@@ -13,7 +13,7 @@ const AllPhones = () => {
     },
   });
   return (
-    <section className="pl-16 pr-16">
+    <section className="lg:pl-16 lg:pr-16">
       <div>
         <div
           className="hero min-h-screen"
