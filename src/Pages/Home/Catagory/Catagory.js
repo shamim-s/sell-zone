@@ -14,7 +14,7 @@ const Catagory = () => {
     })
     return (
         <section>
-            <h1 className='text-3xl font-bold lg:text-left md:text-left text-center'>CATAGORIES</h1>
+            <h1 className='text-2xl font-bold lg:text-left md:text-left text-center'>CATAGORIES</h1>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-6 mt-8'>
                 {
                     catagories.map(catagory => <CatagoryCard key={catagory._id} catagory={catagory}/>)
