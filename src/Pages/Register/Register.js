@@ -11,7 +11,7 @@ const Register = () => {
 
   const [viewPassword, setViewPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const {user, setUser, createNewUser, updateUser} = useContext(AuthContext);
+  const {googleSignin, setUser, createNewUser, updateUser} = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -69,6 +69,7 @@ const Register = () => {
                     navigate('/');
                     console.log(user);
                     setLoading(false);
+                    reset();
                 })
             })
             .catch(err => {
@@ -83,10 +84,20 @@ const Register = () => {
         })
 
     })
+  }
 
-
-    // console.log(image);
-    // reset();
+  const handleGoogleSignin = () => {
+    googleSignin()
+    .then(result => {
+      const user = result.user;
+      setUser(user);
+      toast.success('Login Success');
+      navigate('/');
+    })
+    .catch(err => {
+      console.log(err);
+      toast.error(err.message);
+    })
   }
   return (
     <div className="mt-10 mb-10">
@@ -107,6 +118,7 @@ const Register = () => {
         </p>
         <div className="my-6 space-y-4">
           <button
+            onClick={handleGoogleSignin}
             aria-label="Login with Google"
             type="button"
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-sky-400"

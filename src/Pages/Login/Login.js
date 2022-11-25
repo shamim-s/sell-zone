@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import Spinner from "../../Components/Spinner/Spinner";
 
 const Login = () => {
-    const {user, setUser, loginUser} =  useContext(AuthContext);
+    const {user, setUser, loginUser, googleSignin} =  useContext(AuthContext);
     const [viewPassword, setViewPassword] = useState(false);
     const {register, handleSubmit, errors} = useForm();
     const [loading, setLoading] = useState(false);
@@ -32,6 +32,43 @@ const Login = () => {
             toast.error(err.message);
         })
     }
+
+    const handleGoogleSignin = () => {
+        googleSignin()
+        .then(result => {
+          const user = result.user;
+          console.log(user);
+
+          const newUser = {
+            email: user.email,
+            img: user.photoURL,
+            name: user.displayName,
+          };
+
+        //   console.log(newUser);
+
+        //   setUser(user);
+          //save to db
+          fetch(`http://localhost:5000/add/newuser`,{
+            method: 'PUT',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(newUser)
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            toast.success('Signin Success');
+            navigate('/');
+          })
+          
+        })
+        .catch(err => {
+          console.log(err);
+          toast.error(err.message);
+        })
+      }
   return (
     <div className="mt-10 mb-10">
       <div className="w-full max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100 mx-auto">
@@ -50,6 +87,7 @@ const Login = () => {
         </p>
         <div className="my-6 space-y-4">
           <button
+            onClick={handleGoogleSignin}
             aria-label="Login with Google"
             type="button"
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-sky-400"

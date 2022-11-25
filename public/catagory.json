@@ -1,0 +1,111 @@
+[
+  {
+    "cataId": "apple_iphone",
+    "img": "https://www.mobilepagla.com/wp-content/uploads/2021/04/Apple-iPhone-8-Plus-500x500.jpg",
+    "model": "Apple iphone 8 plus",
+    "storage": "128GB 3GB RAM",
+    "chipset": "Apple A11 Bionic",
+    "0riginalPrice": 84000,
+    "sellPrice": 44000,
+    "seller": "Shahariyar Hossain",
+    "location": "Dinajpur",
+    "used": "3 Month"
+  },
+  {
+    "cataId": "samsung_phone",
+    "img": "https://estore.com.bd/wp-content/uploads/2021/10/Samsung-Galaxy-A32-Awesome-White.jpg",
+    "model": "Samsung Galaxy A32",
+    "storage": "128GB, 8GB RAM",
+    "chipset": "Mediatek Helio G80",
+    "0riginalPrice": 27999,
+    "sellPrice": 17000,
+    "seller": "Hasan Riyad",
+    "location": "Dinajpur",
+    "used": "6 Month"
+  },
+  {
+    "cataId": "apple_iphone",
+    "img": "https://www.mobiledokan.com/wp-content/uploads/2019/03/Apple-iPhone-XS-Max-Gold.jpg",
+    "model": "Apple iphone Xs",
+    "storage": "64GB, 3GB RAM",
+    "chipset": "Apple A12 Bionic",
+    "0riginalPrice": 90000,
+    "sellPrice": 44000,
+    "seller": "Shakib Sardar",
+    "location": "Tangail",
+    "used": "11 Month"
+  },
+  {
+    "cataId": "xiaomi_phones",
+    "img": "https://www.mobiledokan.co/wp-content/uploads/2021/11/Xiaomi-12-1.jpg",
+    "model": "Xiaomi 12",
+    "storage": "128GB, 8GB RAM",
+    "chipset": "Snapdragon 8 Gen 1",
+    "0riginalPrice": 70000,
+    "sellPrice": 56000,
+    "seller": "Selim Reja",
+    "location": "Sylhet",
+    "used": "4 Month"
+  },
+  {
+    "cataId": "samsung_phone",
+    "img": "https://www.mobileghor.com/wp-content/uploads/2021/02/Samsung-Galaxy-M51-Electric-Blue.jpg",
+    "model": "Samsung Galaxy M51",
+    "storage": "128GB, 8GB RAM",
+    "chipset": "Qualcomm Snapdragon 730G",
+    "0riginalPrice": 33999,
+    "sellPrice": 23000,
+    "seller": "Joy Roy",
+    "location": "Barisal",
+    "used": "7 Month"
+  },
+  {
+    "cataId": "xiaomi_phones",
+    "img": "https://mobilefactbd.com/wp-content/uploads/2021/11/Xiaomi-Redmi-Note-12.jpg",
+    "model": "Xiaomi Redmi Note 12",
+    "storage": "128GB, 6GB RAM",
+    "chipset": "Qualcomm Snapdragon 4 Gen 1",
+    "0riginalPrice": 46999,
+    "sellPrice": 32000,
+    "seller": "Rasel Ahmed",
+    "location": "Dhaka",
+    "used": "2 Month"
+  },
+  {
+    "cataId": "apple_iphone",
+    "img": "https://www.muthophone.com.bd/image/cache/catalog/mobiles/iphone/iphone8-64gb/iphone-8-red-600x600.jpg",
+    "model": "Apple iphone 8",
+    "storage": "64GB, 4GB RAM",
+    "chipset": "Apple A11 Bionic (10 nm)",
+    "0riginalPrice": 64999,
+    "sellPrice": 33000,
+    "seller": "Atiqur Rahman",
+    "location": "Rangpur",
+    "used": "8 Month"
+  },
+  {
+    "cataId": "samsung_phone",
+    "img": "https://mobilefactbd.com/wp-content/uploads/2020/03/Samsung-Galaxy-M21.jpg",
+    "model": "Samsung Galaxy M21",
+    "storage": "128GB, 6GB RAM",
+    "chipset": "Exynos 9611",
+    "0riginalPrice": 18999,
+    "sellPrice": 12000,
+    "seller": "Tanvir Rahman",
+    "location": "Dhaka",
+    "used": "12 month"
+  },
+  {
+    "cataId": "xiaomi_phones",
+    "img": "https://i0.wp.com/www.mobilebd.co/wp-content/uploads/2021/10/Xiaomi-Redmi-Note-11-5G-Official-Image-500x500.png",
+    "model": "Xiaomi Redmi Note 11",
+    "storage": "128GB, 6GB RAM",
+    "chipset": "Qualcomm Snapdragon 680 4G,M",
+    "0riginalPrice": 24499,
+    "sellPrice": 19000,
+    "seller": "Titash Ahmed",
+    "location": "Rangpur",
+    "used": "42 month"
+  }
+  
+]
