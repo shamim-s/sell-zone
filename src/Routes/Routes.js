@@ -5,6 +5,7 @@ import AllUser from "../Dashbord/AllUser/AllUser";
 import Cart from "../Dashbord/Cart/Cart";
 import MyProducts from "../Dashbord/MyProducts/MyProducts";
 import Reports from "../Dashbord/Reports/Reports";
+import VerifySellerRequest from "../Dashbord/VerifySellerRequest/VerifySellerRequest";
 import DashbordLayout from "../Layout/DashbordLayout";
 import Main from "../Layout/Main";
 import AllPhones from "../Pages/AllPhones/AllPhones";
@@ -16,6 +17,7 @@ import PhoneDetails from "../Pages/PhoneDetails/PhoneDetails";
 import Register from "../Pages/Register/Register";
 import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
+import RoutesSeller from "./RoutesSeller";
 
 export const router = createBrowserRouter([
     {
@@ -63,11 +65,19 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/dashbord/add_product',
-                element: <PrivateRoutes><AddProduct/></PrivateRoutes>
+                element: <PrivateRoutes>
+                    <RoutesSeller>
+                    <AddProduct/>
+                    </RoutesSeller>
+                    </PrivateRoutes>
             },
             {
                 path:'/dashbord/my_product',
-                element: <PrivateRoutes><MyProducts/></PrivateRoutes>
+                element: <PrivateRoutes>
+                            <RoutesSeller>
+                                 <MyProducts/>
+                            </RoutesSeller>
+                         </PrivateRoutes>
             },
             {
                 path:'/dashbord/reports',
@@ -90,6 +100,14 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes>
                     <AdminRoutes>
                         <AllSeller/>
+                    </AdminRoutes>
+                    </PrivateRoutes>
+            },
+            {
+                path:'/dashbord/verify_seller_req',
+                element: <PrivateRoutes>
+                    <AdminRoutes>
+                        <VerifySellerRequest/>
                     </AdminRoutes>
                     </PrivateRoutes>
             },

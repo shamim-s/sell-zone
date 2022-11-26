@@ -30,6 +30,7 @@ const Login = () => {
         .catch(err => {
             console.log(err);
             toast.error(err.message);
+            setLoading(false);
         })
     }
 

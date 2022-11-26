@@ -4,10 +4,12 @@ import Navbar from "../Pages/Shared/Navbar/Navbar";
 import { FaChevronRight } from "react-icons/fa";
 import useAdmin from "../Hooks/useAdmin";
 import { AuthContext } from "../Context/Context";
+import useSeller from "../Hooks/useSeller";
 
 const DashbordLayout = () => {
   const {user} = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
+  const [isSeller, setIsSellerLoading] = useSeller(user?.email);
 
   return (
     <div>
@@ -27,14 +29,18 @@ const DashbordLayout = () => {
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-primary text-white">
             <li>
-              <Link>Cart</Link>
+              <Link to={'/dashbord'}>Cart</Link>
             </li>
-            <li>
+            {
+              isSeller && <>
+                <li>
               <Link to={'/dashbord/add_product'}>Add New Product</Link>
             </li>
             <li>
               <Link to={'/dashbord/my_product'}>My Products</Link>
             </li>
+              </>
+            }
             {
               isAdmin && <>
               <li>
@@ -45,6 +51,9 @@ const DashbordLayout = () => {
             </li>
             <li>
               <Link to={'/dashbord/reports'}>Reports</Link>
+            </li>
+            <li>
+              <Link to={'/dashbord/verify_seller_req'}>Seller Verify Requests</Link>
             </li>
               </>
             }
