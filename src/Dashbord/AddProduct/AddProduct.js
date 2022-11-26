@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/Context";
+import { format} from 'date-fns';
 import axios from 'axios';
 
 const AddProduct = () => {
     const {register, handleSubmit} = useForm();
     const {user} = useContext(AuthContext);
+    const date = format(new Date(), 'PP');
 
     const [isVerified, setIsVerified] = useState(false);
 
@@ -37,6 +39,7 @@ const AddProduct = () => {
             sellPrice,
             storage,
             used,
+            postDate: date,
             isVerified
         }
         console.log(phone);
