@@ -4,22 +4,22 @@ import Spinner from '../Components/Spinner/Spinner';
 import { AuthContext } from '../Context/Context';
 import useSeller from '../Hooks/useSeller';
 
-const RoutesSeller = ({children}) => {
-    const {user, loading, logOutUser} = useContext(AuthContext);
-    const [isSeller, isSellerLoading] = useSeller(user?.email);
+const ASellerRoutes = ({children}) => {
+    const {user, loading} = useContext(AuthContext);
+    const [isSeller , isLoading] = useSeller(user?.email);
 
     const location = useLocation();
-
-    if(loading || isSellerLoading){
-        return <Spinner/>;
+    
+    if(loading || isLoading){
+        return <Spinner/> ;
     }
 
     if(user?.email && isSeller){
         return children;
     }
+
     return <Navigate to={'/login'} state={{from:location}} replace>
-        {logOutUser()}
-    </Navigate>
+           </Navigate>
 };
 
-export default RoutesSeller;
+export default ASellerRoutes;

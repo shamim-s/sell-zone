@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { FaTrashAlt } from "react-icons/fa";
+import axios from 'axios';
 const AllUser = () => {
-  const { data: users = [] } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users/buyers`);
-      const data = await res.json();
-      return data;
-    },
-  });
+  const [users, setUsers] = useState([]);
+  
+  useEffect(() => {
+    axios.get(`http://localhost:5000/users/buyers`)
+    .then(res => setUsers(res.data))
+  },[users])
+
   return (
     <div className="lg:mt-0 md:mt-4 mt-10">
       <div className="overflow-x-auto w-full">
@@ -49,7 +49,7 @@ const AllUser = () => {
                     <td>
                       {user.email}
                     </td>
-                    <td><button className="btn btn-xs rounded-sm bg-red-500 border-none">Delete</button></td>
+                    <td><FaTrashAlt className="text-xl text-red-500 cursor-pointer transition-all hover:text-gray-800"/></td>
                   </tr>)
             }
           </tbody>

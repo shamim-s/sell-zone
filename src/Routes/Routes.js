@@ -16,8 +16,8 @@ import Login from "../Pages/Login/Login";
 import PhoneDetails from "../Pages/PhoneDetails/PhoneDetails";
 import Register from "../Pages/Register/Register";
 import AdminRoutes from "./AdminRoutes";
+import ASellerRoutes from "./ASellerRoutes";
 import PrivateRoutes from "./PrivateRoutes";
-import RoutesSeller from "./RoutesSeller";
 
 export const router = createBrowserRouter([
     {
@@ -66,50 +66,50 @@ export const router = createBrowserRouter([
             {
                 path:'/dashbord/add_product',
                 element: <PrivateRoutes>
-                    <RoutesSeller>
-                    <AddProduct/>
-                    </RoutesSeller>
-                    </PrivateRoutes>
+                            <ASellerRoutes>
+                                <AddProduct/>
+                            </ASellerRoutes>
+                        </PrivateRoutes>
             },
             {
                 path:'/dashbord/my_product',
                 element: <PrivateRoutes>
-                            <RoutesSeller>
-                                 <MyProducts/>
-                            </RoutesSeller>
+                            <ASellerRoutes>
+                                <MyProducts/>
+                            </ASellerRoutes>
                          </PrivateRoutes>
             },
             {
                 path:'/dashbord/reports',
                 element: <PrivateRoutes>
-                    <AdminRoutes>
-                        <Reports/>
-                    </AdminRoutes>
-                    </PrivateRoutes>
+                            <AdminRoutes>
+                                 <Reports/>
+                            </AdminRoutes>
+                         </PrivateRoutes>
             },
             {
                 path:'/dashbord/all_users',
                 element: <PrivateRoutes>
-                    <AdminRoutes>
-                        <AllUser/>
-                    </AdminRoutes>
-                    </PrivateRoutes>
+                            <AdminRoutes>
+                                <AllUser/>
+                            </AdminRoutes>
+                         </PrivateRoutes>
             },
             {
                 path:'/dashbord/all_sellers',
                 element: <PrivateRoutes>
-                    <AdminRoutes>
-                        <AllSeller/>
-                    </AdminRoutes>
-                    </PrivateRoutes>
+                            <AdminRoutes>
+                                <AllSeller/>
+                            </AdminRoutes>
+                        </PrivateRoutes>
             },
             {
                 path:'/dashbord/verify_seller_req',
                 element: <PrivateRoutes>
-                    <AdminRoutes>
-                        <VerifySellerRequest/>
-                    </AdminRoutes>
-                    </PrivateRoutes>
+                            <AdminRoutes>
+                                <VerifySellerRequest/>
+                            </AdminRoutes>
+                         </PrivateRoutes>
             },
         ]
     }

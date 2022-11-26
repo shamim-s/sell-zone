@@ -1,11 +1,73 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { FaTrashAlt } from "react-icons/fa";
 
 const AllSeller = () => {
-    return (
-        <div>
-            <h1>All Sellers</h1>
-        </div>
-    );
+  const [sellers, setSellers] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/users/sellers`)
+      .then((res) => setSellers(res.data));
+  }, [sellers]);
+
+  return (
+    <div className="lg:mt-0 md:mt-8 mt-12">
+      <div className="overflow-x-auto w-full">
+        <table className="table w-full">
+          <thead>
+            <tr>
+              <th>
+                
+              </th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Action</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+                sellers.map(seller => <tr key={seller._id}>
+                    <th>
+                      
+                    </th>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img
+                              src={seller.img}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold">{seller.name}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      {seller.email}
+                    </td>
+                    <td> <FaTrashAlt className="text-xl text-red-500 cursor-pointer transition-all hover:text-slate-800"/> </td>
+                  </tr>)
+            }
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Action</th>
+              <th></th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  );
 };
 
 export default AllSeller;

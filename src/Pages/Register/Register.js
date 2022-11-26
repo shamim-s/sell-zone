@@ -17,11 +17,11 @@ const Register = () => {
 
   const handleRegister = data => {
 
-    const name = data.name;
-    const email = data.email;
-    const password = data.password;
-    const selectedValue = data.select;
-    const image = data.img[0];
+      const name = data.name;
+      const email = data.email;
+      const password = data.password;
+      const selectedValue = data.select;
+      const image = data.img[0];
 
     const formData = new FormData()
     formData.append('image', image);
@@ -46,15 +46,42 @@ const Register = () => {
             updateUser(name, userImage)
             .then(() => {
 
-                const userData = {
+                if(selectedValue !== 'seller'){
+                  const userData = {
                     name,
                     email,
                     role: selectedValue,
                     img: user.photoURL
                 }
+                  //add user in database
+                    fetch(`http://localhost:5000/add_user`, {
+                      method:'POST',
+                      headers:{
+                          'content-type':'application/json'
+                      },
+                      body: JSON.stringify(userData)
+                  })
+                  .then(res => res.json())
+                  .then(data => {
+                      console.log(data);
+                      setUser(user);
+                      toast.success('Register Successfully');
+                      navigate('/');
+                      console.log(user);
+                      setLoading(false);
+                      reset();
+                  })
+                }else{
+                  const userData = {
+                    name,
+                    email,
+                    role: selectedValue,
+                    img: user.photoURL,
+                    status: 'unverified'
+                  }
 
-                //add user in database
-                fetch(`http://localhost:5000/add_user`, {
+                  //add user in database
+                  fetch(`http://localhost:5000/add_user`, {
                     method:'POST',
                     headers:{
                         'content-type':'application/json'
@@ -71,6 +98,7 @@ const Register = () => {
                     setLoading(false);
                     reset();
                 })
+                }
             })
             .catch(err => {
                 console.error(err);

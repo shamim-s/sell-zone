@@ -5,11 +5,13 @@ import { FaChevronRight } from "react-icons/fa";
 import useAdmin from "../Hooks/useAdmin";
 import { AuthContext } from "../Context/Context";
 import useSeller from "../Hooks/useSeller";
+import ProfileCard from "../Components/ProfileCard/ProfileCard";
 
 const DashbordLayout = () => {
   const {user} = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
-  const [isSeller, setIsSellerLoading] = useSeller(user?.email);
+  const [isSeller] = useSeller(user?.email);
+  console.log('seller', isSeller);
 
   return (
     <div>
@@ -28,12 +30,15 @@ const DashbordLayout = () => {
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-primary text-white">
+          <ProfileCard/>
             <li>
               <Link to={'/dashbord'}>Cart</Link>
             </li>
+            
+            <>
             {
               isSeller && <>
-                <li>
+              <li>
               <Link to={'/dashbord/add_product'}>Add New Product</Link>
             </li>
             <li>
@@ -41,6 +46,8 @@ const DashbordLayout = () => {
             </li>
               </>
             }
+            </>
+            
             {
               isAdmin && <>
               <li>
