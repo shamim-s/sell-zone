@@ -2,18 +2,27 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Spinner from "../../Components/Spinner/Spinner";
 import { AuthContext } from "../../Context/Context";
+import useVerifyUser from "../../Hooks/useVerifyUser";
 
 const Register = () => {
   const { register, formState:{errors}, handleSubmit , reset} = useForm();
-
+  const [createdUserEmail, setCreatedUserEmail] = ('');
+  const [token] = useVerifyUser(createdUserEmail);
   const [viewPassword, setViewPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const {googleSignin, setUser, createNewUser, updateUser} = useContext(AuthContext);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
+
+  if(token){
+    navigate(from, {replace: true})
+  }
 
   const handleRegister = data => {
 
@@ -46,6 +55,7 @@ const Register = () => {
             updateUser(name, userImage)
             .then(() => {
 
+              //if user select to buyer
                 if(selectedValue !== 'seller'){
                   const userData = {
                     name,
@@ -64,14 +74,16 @@ const Register = () => {
                   .then(res => res.json())
                   .then(data => {
                       console.log(data);
-                      setUser(user);
                       toast.success('Register Successfully');
-                      navigate('/');
                       console.log(user);
+                      setCreatedUserEmail(userData.email);
+                      setUser(user);
                       setLoading(false);
                       reset();
                   })
                 }else{
+                  //if user select to seller
+                  
                   const userData = {
                     name,
                     email,
@@ -91,10 +103,10 @@ const Register = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
-                    setUser(user);
+                    setCreatedUserEmail(userData.email);
                     toast.success('Register Successfully');
-                    navigate('/');
                     console.log(user);
+                    setUser(user);
                     setLoading(false);
                     reset();
                 })

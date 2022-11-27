@@ -1,19 +1,30 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/Context";
 import toast from "react-hot-toast";
 import Spinner from "../../Components/Spinner/Spinner";
+import useVerifyUser from "../../Hooks/useVerifyUser";
 
 const Login = () => {
     const {user, setUser, loginUser, googleSignin} =  useContext(AuthContext);
     const [viewPassword, setViewPassword] = useState(false);
     const {register, handleSubmit, errors} = useForm();
+
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useVerifyUser(loginUserEmail);
+
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
     
 
+    if(token){
+      navigate(from, {replace: true});
+    }
     const handleLogin = data => {
         const email = data.email;
         const password = data.password;
@@ -22,10 +33,10 @@ const Login = () => {
         loginUser(email, password)
         .then(result => {
             const user = result.user;
+            setLoginUserEmail(user.email);
             setUser(user);
             toast.success("Login Success");
             setLoading(false);
-            navigate('/');
         })
         .catch(err => {
             console.log(err);

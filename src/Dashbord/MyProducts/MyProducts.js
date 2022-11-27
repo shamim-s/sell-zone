@@ -1,34 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useEffect, useState, version } from "react";
+import React, { useContext, useEffect, useState} from "react";
 import toast from "react-hot-toast";
 import ProductDeleteModal from "../../Components/ProductDeleteModal/ProductDeleteModal";
 import { AuthContext } from "../../Context/Context";
-import axios from 'axios';
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
   const [deleteProduct, setDeleteProduct] = useState({});
-  const [isAddRunning, setIsAddRunning] = useState(false);
-
-  const { data: products = [], refetch } = useQuery({
-    queryKey: ["products"],
-    queryFn: async () => {
-      const res = await fetch(
-        `http://localhost:5000/my_products/${user?.email}`
-      );
-
-      const data = await res.json();
-      return data;
-    },
-  });
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/running/add`)
-    .then(res => setIsAddRunning(res.data.isRunning))
-  },[])
+    fetch(`http://localhost:5000/my_products/${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      setProducts(data);
+    })
+  },[deleteProduct, user])
 
 
-  const { data: advertise = [] } = useQuery({
+  const { data: advertise = [], refetch} = useQuery({
     queryKey: ["advertise"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/advertise/item`);
@@ -66,12 +60,10 @@ const MyProducts = () => {
           if(data.acknowledged){
             console.log(data);
             toast.success('Product added to Advertise');
-            refetch();
           }
         })
       }
     })
-    refetch();
   }
 
   const handleStopAdvertise = (product) => {
@@ -92,7 +84,6 @@ const MyProducts = () => {
           if(data.acknowledged){
             console.log(data);
             toast.success('Advertise stopped');
-            refetch();
           }
         })
     })
