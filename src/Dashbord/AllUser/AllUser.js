@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
@@ -9,8 +8,21 @@ const AllUser = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users/buyers`)
+      .get(`http://localhost:5000/users/buyers`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
+        }
+      })
       .then((res) => setUsers(res.data));
+
+  //   fetch(`http://localhost:5000/users/buyers`, {
+  //         headers: {
+  //           authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
+  //         }
+  //       })
+  //       .then(res => res.json())
+  //       .then(data => setUsers(data));
+  
   }, [users, deleteUser]);
 
   return (

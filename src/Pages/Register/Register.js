@@ -9,7 +9,7 @@ import useVerifyUser from "../../Hooks/useVerifyUser";
 
 const Register = () => {
   const { register, formState:{errors}, handleSubmit , reset} = useForm();
-  const [createdUserEmail, setCreatedUserEmail] = ('');
+  const [createdUserEmail, setCreatedUserEmail] = useState('');
   const [token] = useVerifyUser(createdUserEmail);
   const [viewPassword, setViewPassword] = useState(false);
   const [loading, setLoading] = useState(false);

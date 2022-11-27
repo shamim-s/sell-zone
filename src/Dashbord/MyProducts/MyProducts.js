@@ -90,7 +90,7 @@ const MyProducts = () => {
   }
 
   return (
-    <div>
+    <div className="mt-8">
       <h1>My Products</h1>
       <div>
         <div className="overflow-x-auto">

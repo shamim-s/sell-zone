@@ -14,6 +14,9 @@ const VerifySellerRequest = () => {
     const handleAccept = (email, id) => {
         fetch(`http://localhost:5000/request/accept/${email}`, {
             method:'PUT',
+            headers: {
+              authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
+            }
         })
         .then(res => res.json())
         .then(data => {
@@ -27,6 +30,9 @@ const VerifySellerRequest = () => {
     const handleDelete = (id) => {
         fetch(`http://localhost:5000/request/delete/${id}`,{
             method: 'DELETE',
+            headers: {
+              authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
+          }
         })
         .then(res => res.json())
         .then(data => {

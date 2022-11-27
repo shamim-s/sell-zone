@@ -8,7 +8,11 @@ const AllSeller = () => {
   const [deleteSeller, setDeleteSeller] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users/sellers`)
+      .get(`http://localhost:5000/users/sellers`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
+        }
+      })
       .then((res) => setSellers(res.data));
   }, [sellers, deleteSeller]);
 
