@@ -33,6 +33,7 @@ const MyProducts = () => {
                 <th>Model</th>
                 <th>Category</th>
                 <th>Post Date</th>
+                <th>Status</th>
                 <th>Advertise</th>
                 <th>Action</th>
               </tr>
@@ -44,13 +45,16 @@ const MyProducts = () => {
                   <td>{product.model}</td>
                   <td>{product.cataId}</td>
                   <td>{product.postDate}</td>
+                  <td>{product.status}</td>
                   <td>
                     {product?.status === "available" ? (
                       <button className="btn btn-xs bg-primary rounded-none border-0">
                         Advertise
                       </button>
                     ) : (
-                      <button className="btn btn-xs bg-primary rounded-none border-0">
+                      <button 
+                      disabled={product.status !== 'available'}
+                      className="btn btn-xs bg-primary rounded-none border-0">
                         Advertise
                       </button>
                     )}

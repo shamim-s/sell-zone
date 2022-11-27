@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { HiChip, HiOutlineDatabase } from "react-icons/hi";
+import { HiBadgeCheck } from "react-icons/hi";
 import { AuthContext } from "../../Context/Context";
 import AddCartModal from "./AddCartModal";
 import Modal from "../../Components/Modal/Modal";
@@ -19,7 +20,8 @@ const PhoneDetails = () => {
     model,
     chipset,
     postDate,
-    status
+    status,
+    isVerified
   } = phone;
 
   return (
@@ -45,9 +47,13 @@ const PhoneDetails = () => {
             <span className="font-semibold">Selling Price:</span> {sellPrice}{" "}
             BDT
           </p>
-          <p className="mb-2">
-            <span className="font-semibold">Seller:</span> {seller}
-          </p>
+          <div className="mb-2 flex items-center">
+            <span className="font-semibold">Seller: </span> 
+             <span className="ml-1 text-md">{seller}</span> 
+             {
+                phone?.isVerified && <div className="tooltip tooltip-right tooltip-primary" data-tip="Verified Seller"><HiBadgeCheck className="ml-1 text-primary text-xl"/></div>
+             }
+          </div>
           <p className="mb-2">
             <span className="font-semibold">Location:</span> {location}
           </p>
