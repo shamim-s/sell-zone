@@ -39,9 +39,9 @@ const AllSeller = () => {
                         />
                       </div>
                     </div>
-                    <div>
-                      <div className="font-bold">{seller.name}</div>
-                    </div>
+                    <p>
+                      <span className="font-bold">{seller.name}</span>
+                    </p>
                   </div>
                 </td>
                 <td>{seller.email}</td>

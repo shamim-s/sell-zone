@@ -4,6 +4,7 @@ import Catagory from '../Catagory/Catagory';
 import Hero from '../Hero/Hero';
 import OurProducts from '../OurProducts/OurProducts';
 import Testimonali from '../Testimonali/Testimonali';
+import Advertise from './Advertise';
 
 const Home = () => {
     return (
@@ -13,6 +14,9 @@ const Home = () => {
             </section>
             <section className='mb-16 lg:pl-20 lg:pr-20'>
                 <Catagory/>
+            </section>
+            <section>
+                <Advertise/>
             </section>
             <section className='mb-16 lg:pl-20 lg:pr-20'>
                 <OurProducts/>

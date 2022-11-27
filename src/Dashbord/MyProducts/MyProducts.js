@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState, version } from "react";
+import toast from "react-hot-toast";
 import ProductDeleteModal from "../../Components/ProductDeleteModal/ProductDeleteModal";
 import { AuthContext } from "../../Context/Context";
 
@@ -19,7 +20,32 @@ const MyProducts = () => {
     },
   });
 
-  const handleDelete = (product) => {};
+  const handleAdvertise = (product) => {
+
+    const advertiseItem = {
+      model: product.model,
+      cataId: product.cataId,
+      img: product.img,
+      status: product.status,
+      productId: product._id
+    }
+
+    fetch(`http://localhost:5000/advertise/add`, {
+      method: 'POST',
+      headers: {
+        'content-type':'application/json'
+      },
+      body: JSON.stringify(advertiseItem)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.acknowledged){
+        console.log(data);
+        toast.success('Product added to Advertise');
+      }
+    })
+
+  }
 
   return (
     <div>
@@ -39,7 +65,7 @@ const MyProducts = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product, i) => (<>
+              {products.map((product, i) => (
                 <tr key={product._id}>
                   <th>{i + 1}</th>
                   <td>{product.model}</td>
@@ -48,7 +74,7 @@ const MyProducts = () => {
                   <td>{product.status}</td>
                   <td>
                     {product?.status === "available" ? (
-                      <button className="btn btn-xs bg-primary rounded-none border-0">
+                      <button onClick={() => handleAdvertise(product)} className="btn btn-xs bg-primary rounded-none border-0">
                         Advertise
                       </button>
                     ) : (
@@ -67,11 +93,10 @@ const MyProducts = () => {
                     </label>
                   </td>
                 </tr>
-                <ProductDeleteModal refetch={refetch} deleteProduct={deleteProduct}/>
-                </>
               ))}
             </tbody>
           </table>
+          <ProductDeleteModal refetch={refetch} deleteProduct={deleteProduct}/>
         </div>
       </div>
     </div>
