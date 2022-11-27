@@ -5,6 +5,7 @@ import { format} from 'date-fns';
 import axios from 'axios';
 import Spinner from "../../Components/Spinner/Spinner";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
     const {register, handleSubmit} = useForm();
@@ -12,6 +13,7 @@ const AddProduct = () => {
     const date = format(new Date(), 'PP');
     const [isVerified, setIsVerified] = useState(false);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`http://localhost:5000/seller/${user?.email}`)
@@ -61,6 +63,7 @@ const AddProduct = () => {
             cataId,
             img,
             seller,
+            sellerEmail: user?.email,
             model,
             originalPrice,
             sellPrice,
@@ -85,6 +88,7 @@ const AddProduct = () => {
                     console.log(data);
                     setLoading(false);
                     toast.success('New Product Added');
+                    navigate('/dashbord/my_product');
                 }
             })
 

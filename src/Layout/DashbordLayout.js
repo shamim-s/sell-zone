@@ -34,7 +34,6 @@ const DashbordLayout = () => {
               <Link to={'/dashbord'}>Cart</Link>
             </li>
             
-            <>
             {
               isSeller && <>
               <li>
@@ -45,7 +44,6 @@ const DashbordLayout = () => {
             </li>
               </>
             }
-            </>
             
             {
               isAdmin && <>
