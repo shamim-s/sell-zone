@@ -1,15 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState, version } from "react";
+import React, { useContext, useEffect, useState, version } from "react";
 import toast from "react-hot-toast";
 import ProductDeleteModal from "../../Components/ProductDeleteModal/ProductDeleteModal";
 import { AuthContext } from "../../Context/Context";
+import axios from 'axios';
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
   const [deleteProduct, setDeleteProduct] = useState({});
+  const [isAddRunning, setIsAddRunning] = useState(false);
 
   const { data: products = [], refetch } = useQuery({
-    queryKey: ["myProducts"],
+    queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
         `http://localhost:5000/my_products/${user?.email}`
@@ -19,6 +21,22 @@ const MyProducts = () => {
       return data;
     },
   });
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/running/add`)
+    .then(res => setIsAddRunning(res.data.isRunning))
+  },[])
+
+
+  const { data: advertise = [] } = useQuery({
+    queryKey: ["advertise"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/advertise/item`);
+      const data = await res.json();
+      return data;
+    },
+  });
+  const advertiseItem = advertise[0];
 
   const handleAdvertise = (product) => {
 
@@ -40,11 +58,44 @@ const MyProducts = () => {
     .then(res => res.json())
     .then(data => {
       if(data.acknowledged){
-        console.log(data);
-        toast.success('Product added to Advertise');
+        fetch(`http://localhost:5000/advertise/start/${product._id}`, {
+          method: 'PUT'
+        })
+        .then(res => res.json())
+        .then(data => {
+          if(data.acknowledged){
+            console.log(data);
+            toast.success('Product added to Advertise');
+            refetch();
+          }
+        })
       }
     })
+    refetch();
+  }
 
+  const handleStopAdvertise = (product) => {
+    
+    //Stop Advertise
+    fetch(`http://localhost:5000/advertise/stop/${product._id}`, {
+      method: 'PUT'
+    })
+    .then(res => res.json())
+    .then(data => {
+
+      //Delete advertise data from database
+        fetch(`http://localhost:5000/advertise/delete`, {
+        method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => {
+          if(data.acknowledged){
+            console.log(data);
+            toast.success('Advertise stopped');
+            refetch();
+          }
+        })
+    })
   }
 
   return (
@@ -74,9 +125,18 @@ const MyProducts = () => {
                   <td>{product.status}</td>
                   <td>
                     {product?.status === "available" ? (
-                      <button onClick={() => handleAdvertise(product)} className="btn btn-xs bg-primary rounded-none border-0">
+                      <>
+                      {
+                        product?.isAdvertising ? <button 
+                        onClick={() => handleStopAdvertise(product)} className="btn btn-xs bg-red-500 rounded-sm border-0">Stop Advertise</button>
+                        :
+                        <button 
+                        disabled={advertiseItem?.productId !== product?._id && advertise.length === 1}
+                        onClick={() => handleAdvertise(product)} className="btn btn-xs bg-primary rounded-none border-0">
                         Advertise
-                      </button>
+                        </button>
+                      }
+                      </>
                     ) : (
                       <button 
                       disabled={product.status !== 'available'}
