@@ -3,13 +3,15 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/Context";
 import { format} from 'date-fns';
 import axios from 'axios';
+import Spinner from "../../Components/Spinner/Spinner";
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
     const {register, handleSubmit} = useForm();
     const {user} = useContext(AuthContext);
     const date = format(new Date(), 'PP');
-
     const [isVerified, setIsVerified] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         axios.get(`http://localhost:5000/seller/${user?.email}`)
@@ -23,14 +25,39 @@ const AddProduct = () => {
 
         const cataId = data.brand;
         const model = data.model;
-        const img = data.img[0];
+        const image = data.img[0];
         const seller = user.displayName;
         const originalPrice = data.originalPrice;
         const sellPrice = data.sellPrice;
         const storage = data.storage;
         const used = data.usedMonth;
 
-        const phone = {
+        // const phone = {
+        //     cataId,
+        //     img,
+        //     seller,
+        //     model,
+        //     originalPrice,
+        //     sellPrice,
+        //     storage,
+        //     used,
+        //     postDate: date,
+        //     isVerified
+        // }
+        // console.log(phone);
+        const formData = new FormData()
+        formData.append('image', image)
+
+        setLoading(true);
+        fetch(`https://api.imgbb.com/1/upload?key=4e1ec518aa0732659004cc615a8fe704`,{
+        method:'POST',
+        body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            const img = data.data.display_url;
+            
+            const phone = {
             cataId,
             img,
             seller,
@@ -40,9 +67,30 @@ const AddProduct = () => {
             storage,
             used,
             postDate: date,
-            isVerified
-        }
-        console.log(phone);
+            isVerified,
+            status: 'available'
+            }
+
+            //Add product to database
+            fetch(`http://localhost:5000/add/product`, {
+                method: 'POST',
+                headers: {
+                    'content-type':'application/json'
+                },
+                body: JSON.stringify(phone)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.acknowledged){
+                    console.log(data);
+                    setLoading(false);
+                    toast.success('New Product Added');
+                }
+            })
+
+        })
+
+
     }
 
   return (
@@ -202,7 +250,11 @@ const AddProduct = () => {
             </div>
 
             <div className="lg:col-span-3">
-                <button type="submit" className="btn w-full">Submit</button>
+                <button type="submit" className="btn w-full">
+                    {
+                        loading ? <Spinner/> : 'Submit'
+                    }
+                </button>
             </div>
       </form>
     </div>
