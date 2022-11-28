@@ -17,6 +17,11 @@ const Cart = () => {
 
   return (
     <div className="overflow-x-auto lg:mt-0 md:mt-8 mt-12">
+      {
+        items.length === 0 && <span>
+            No product added
+        </span>
+      }
       <table className="table w-full">
         <thead>
           <tr>

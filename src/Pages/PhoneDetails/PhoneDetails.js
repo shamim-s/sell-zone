@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { HiChip, HiOutlineDatabase } from "react-icons/hi";
 import { HiBadgeCheck } from "react-icons/hi";
 import { AuthContext } from "../../Context/Context";
 import AddCartModal from "./AddCartModal";
 import Modal from "../../Components/Modal/Modal";
+import ReportModal from "../../Components/ReportModal/ReportModal";
 
 const PhoneDetails = () => {
   const { user } = useContext(AuthContext);
+  const [report, setReport] = useState({});
   const phone = useLoaderData();
   const {
     img,
@@ -21,7 +23,8 @@ const PhoneDetails = () => {
     chipset,
     postDate,
     status,
-    isVerified
+    isVerified,
+    _id
   } = phone;
 
   return (
@@ -78,9 +81,12 @@ const PhoneDetails = () => {
           {
             status === 'sold' ? <button disabled className="btn btn-sm">Add Cart</button> : <>
               {user ? (
-              <label htmlFor="add-cart-modal" className="btn btn-sm">
+              <>
+                <label htmlFor="add-cart-modal" className="btn btn-xs rounded-sm hover:bg-primary border-0">
                 Add Cart
               </label>
+              <label onClick={()=> setReport(phone)} htmlFor="report-modal" className="btn btn-xs bg-red-500 rounded-sm border-0 ml-4 cursor-pointer">report</label>
+              </>
               ) : (
               <label htmlFor="login-inform-modal" className="btn btn-sm">
                 Add Cart
@@ -93,6 +99,7 @@ const PhoneDetails = () => {
       </div>
       <AddCartModal phone={phone} />
       <Modal/>
+      <ReportModal report={report}/>
     </section>
   );
 };
