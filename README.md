@@ -3,7 +3,13 @@
 # Name : Sell Zone
 * Website Link : $ https://sell-zone-10e7e.web.app/
 * Depoyed Server Link: $ https://sell-zone-server.vercel.app/
+* Admin Email: shamimibas@gmail.com
+* Admin Password: Alpha_7898@
 
+
+* client repo link: $ https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-shamim-s
+
+* server repo link: $ https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-shamim-s
 # --------------------------------------------
 
 project's features and functionalitie.............
