@@ -35,7 +35,7 @@ const DashbordLayout = () => {
             </li>
             
             {
-              isSeller && <>
+              isSeller.isSeller && <>
               <li>
               <Link to={'/dashbord/add_product'}>Add New Product</Link>
             </li>

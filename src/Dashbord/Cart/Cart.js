@@ -1,38 +1,54 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/Context";
 
 const Cart = () => {
+  const [items, setItems] = useState([]);
+  const {user} = useContext(AuthContext);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/cart/products/${user?.email}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      setItems(data);
+    })
+  },[user?.email])
+
   return (
     <div className="overflow-x-auto lg:mt-0 md:mt-8 mt-12">
       <table className="table w-full">
         <thead>
           <tr>
             <th></th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
+            <th>Model</th>
+            <th>Price</th>
+            <th>Seller</th>
+            <th>Pay</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
-          </tr>
-
-          <tr>
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
-          </tr>
-
-          <tr>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-          </tr>
+          {
+            items.map((item, i) => <tr key={item._id}>
+            <th>{i + 1}</th>
+            <td>{item.model}</td>
+            <td>{item.price}</td>
+            <td>{item.user}</td>
+            <td>
+              {
+                item.paid ? <Link disabled={item.paid} to={`/dashbord/payment/${item._id}`} className="btn btn-xs bg-primary rounded-sm border-0">Pay Now</Link> :
+                <Link to={`/dashbord/payment/${item._id}`} className="btn btn-xs bg-primary rounded-sm border-0">Pay Now</Link>
+              }
+            </td>
+            {
+              item.paid &&
+              <td>
+                <span className="text-red-400">sold</span>
+              </td>
+            }
+          </tr>)
+          }
         </tbody>
       </table>
     </div>

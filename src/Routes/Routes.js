@@ -4,6 +4,7 @@ import AllSeller from "../Dashbord/AllSeller/AllSeller";
 import AllUser from "../Dashbord/AllUser/AllUser";
 import Cart from "../Dashbord/Cart/Cart";
 import MyProducts from "../Dashbord/MyProducts/MyProducts";
+import Payment from "../Dashbord/Payment/Payment";
 import Reports from "../Dashbord/Reports/Reports";
 import VerifySellerRequest from "../Dashbord/VerifySellerRequest/VerifySellerRequest";
 import DashbordLayout from "../Layout/DashbordLayout";
@@ -62,6 +63,11 @@ export const router = createBrowserRouter([
             {
                 path:'/dashbord',
                 element: <PrivateRoutes><Cart/></PrivateRoutes>
+            },
+            {
+                path:'/dashbord/payment/:id',
+                element: <PrivateRoutes><Payment/></PrivateRoutes>,
+                loader: ({params}) => fetch(`http://localhost:5000/cart/${params.id}`)
             },
             {
                 path:'/dashbord/add_product',

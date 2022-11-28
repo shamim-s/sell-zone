@@ -14,15 +14,7 @@ const AllUser = () => {
         }
       })
       .then((res) => setUsers(res.data));
-
-  //   fetch(`http://localhost:5000/users/buyers`, {
-  //         headers: {
-  //           authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
-  //         }
-  //       })
-  //       .then(res => res.json())
-  //       .then(data => setUsers(data));
-  
+      
   }, [users, deleteUser]);
 
   return (

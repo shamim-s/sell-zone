@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Advertise = () => {
-  const { data: advertice = [] } = useQuery({
+  const { data: advertice = [] , refetch} = useQuery({
     queryKey: ["advertise"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/advertise/item`);

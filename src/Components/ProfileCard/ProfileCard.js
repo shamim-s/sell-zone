@@ -7,11 +7,15 @@ import axios from 'axios';
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { async } from "@firebase/util";
+import useSeller from "../../Hooks/useSeller";
 
 const ProfileCard = () => {
     const date = format(new Date(), 'PP');
     const {user} = useContext(AuthContext);
     const [isVerified, setIsVerified] = useState(false);
+    const [isSeller] = useSeller(user?.email);
+
+    console.log(isSeller.isSeller);
 
 
     useEffect(() => {
@@ -82,7 +86,9 @@ const ProfileCard = () => {
             </p>
           </div>
           <div className="flex justify-center pt-2 space-x-4 align-center">
-            {isVerified || <>
+            {
+              isSeller.isSeller === true && <>
+              {isVerified || <>
               {
                 data?.isPending ? <p className="bg-white text-primary px-2 font-semibold rounded-sm">PENDING</p>
                  :
@@ -93,6 +99,8 @@ const ProfileCard = () => {
                  </button>
               }
             </>}
+              </>
+            }
           </div>
         </div>
       </div>
