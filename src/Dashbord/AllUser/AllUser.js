@@ -8,7 +8,7 @@ const AllUser = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users/buyers`, {
+      .get(`https://sell-zone-server.vercel.app/users/buyers`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
         }

@@ -15,7 +15,7 @@ const CheckoutForm = ({cartItem}) => {
 
   useEffect(() => {
     
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://sell-zone-server.vercel.app/create-payment-intent", {
         method: "POST",
         headers: { 
             "Content-Type": "application/json"
@@ -79,7 +79,7 @@ const CheckoutForm = ({cartItem}) => {
             productId: id,
             cartId: _id
         };
-        fetch("http://localhost:5000/cart/payments",{
+        fetch("https://sell-zone-server.vercel.app/cart/payments",{
             method: 'POST',
             headers: {
                 'content-type':'application/json'

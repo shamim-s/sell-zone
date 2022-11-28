@@ -5,14 +5,14 @@ const VerifySellerRequest = () => {
     const {data: requests = [], refetch} = useQuery({
         queryKey: ['verifyRequest'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/verify/request`);
+            const res = await fetch(`https://sell-zone-server.vercel.app/verify/request`);
             const data = await res.json();
             return data;
         }
     })
 
     const handleAccept = (email, id) => {
-        fetch(`http://localhost:5000/request/accept/${email}`, {
+        fetch(`https://sell-zone-server.vercel.app/request/accept/${email}`, {
             method:'PUT',
             headers: {
               authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
@@ -28,7 +28,7 @@ const VerifySellerRequest = () => {
 
     //after verify delete request from db collection
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/request/delete/${id}`,{
+        fetch(`https://sell-zone-server.vercel.app/request/delete/${id}`,{
             method: 'DELETE',
             headers: {
               authorization: `Bearer ${localStorage.getItem('userAccessToken')}`

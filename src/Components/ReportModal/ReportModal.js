@@ -15,7 +15,7 @@ const {user} = useContext(AuthContext);
     }
 
     console.log(reportItem);
-    fetch(`http://localhost:5000/report`, {
+    fetch(`https://sell-zone-server.vercel.app/report`, {
       method: 'POST',
       headers: {
         'content-type':'application/json'

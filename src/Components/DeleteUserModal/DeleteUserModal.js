@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 const DeleteUserModal = ({ deleteUser }) => {
 
   const handleDeleteUser = (user) => {
-    fetch(`http://localhost:5000/users/${user._id}`, {
+    fetch(`https://sell-zone-server.vercel.app/users/${user._id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

@@ -8,7 +8,7 @@ const AllSeller = () => {
   const [deleteSeller, setDeleteSeller] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users/sellers`, {
+      .get(`https://sell-zone-server.vercel.app/users/sellers`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
         }

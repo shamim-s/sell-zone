@@ -13,7 +13,7 @@ const CatagoryPhones = () => {
     queryKey: ["catagory"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/catagory/${phones[0].cataId}`
+        `https://sell-zone-server.vercel.app/catagory/${phones[0].cataId}`
       );
 
       const data = await res.json();

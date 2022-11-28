@@ -61,7 +61,7 @@ const Login = () => {
 
         //   setUser(user);
           //save to db
-          fetch(`http://localhost:5000/add/newuser`,{
+          fetch(`https://sell-zone-server.vercel.app/add/newuser`,{
             method: 'PUT',
             headers: {
                 'content-type' : 'application/json'

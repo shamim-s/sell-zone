@@ -16,7 +16,7 @@ const AddProduct = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/seller/${user?.email}`)
+        axios.get(`https://sell-zone-server.vercel.app/seller/${user?.email}`)
         .then(res => setIsVerified(res.data.isVerified))
     },[user, isVerified])
 
@@ -75,7 +75,7 @@ const AddProduct = () => {
             }
 
             //Add product to database
-            fetch(`http://localhost:5000/add/product`, {
+            fetch(`https://sell-zone-server.vercel.app/add/product`, {
                 method: 'POST',
                 headers: {
                     'content-type':'application/json'

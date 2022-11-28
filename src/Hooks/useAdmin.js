@@ -6,7 +6,7 @@ const useAdmin = (email) => {
 
     useEffect(() => {
         if(email){
-            fetch(`http://localhost:5000/user/admin/${email}`)
+            fetch(`https://sell-zone-server.vercel.app/user/admin/${email}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);

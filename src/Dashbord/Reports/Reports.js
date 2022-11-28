@@ -6,13 +6,13 @@ const Reports = () => {
     const [reports, setReports] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/reports/all`)
+        axios.get(`https://sell-zone-server.vercel.app/reports/all`)
         .then(res => setReports(res.data))
     },[])
 
     const handleDelete = deleteItem => {
         
-        fetch(`http://localhost:5000/report/delete`, {
+        fetch(`https://sell-zone-server.vercel.app/report/delete`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

@@ -39,13 +39,13 @@ export const router = createBrowserRouter([
                 path:'/phone_details/:id',
                 element: <PhoneDetails/>,
                 loader: ({params}) => 
-                fetch(`http://localhost:5000/all/phones/${params.id}`)
+                fetch(`https://sell-zone-server.vercel.app/all/phones/${params.id}`)
             },
             {
                 path:'/catagory/:cataId',
                 element: <PrivateRoutes><CatagoryPhones/></PrivateRoutes>,
                 loader: ({params}) => 
-                fetch(`http://localhost:5000/phones/${params.cataId}`)
+                fetch(`https://sell-zone-server.vercel.app/phones/${params.cataId}`)
             },
             {
                 path: '/blogs',
@@ -72,7 +72,7 @@ export const router = createBrowserRouter([
             {
                 path:'/dashbord/payment/:id',
                 element: <PrivateRoutes><Payment/></PrivateRoutes>,
-                loader: ({params}) => fetch(`http://localhost:5000/cart/${params.id}`)
+                loader: ({params}) => fetch(`https://sell-zone-server.vercel.app/cart/${params.id}`)
             },
             {
                 path:'/dashbord/add_product',

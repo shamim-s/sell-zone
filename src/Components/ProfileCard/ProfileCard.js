@@ -19,20 +19,20 @@ const ProfileCard = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/seller/${user?.email}`)
+        axios.get(`https://sell-zone-server.vercel.app/seller/${user?.email}`)
         .then(res => setIsVerified(res.data.isVerified))
     },[user, isVerified])
 
 
     // useEffect(() => {
-    //   axios.get(`http://localhost:5000/seller/request/${user?.email}`)
+    //   axios.get(`https://sell-zone-server.vercel.app/seller/request/${user?.email}`)
     //   .then(res => setIsPending(res.data.isPending))
     // },[user, isPending])
 
     const {data, refetch} = useQuery({
       queryKey: ['isPending'],
       queryFn: async () => {
-        const res = await fetch(`http://localhost:5000/seller/request/${user?.email}`)
+        const res = await fetch(`https://sell-zone-server.vercel.app/seller/request/${user?.email}`)
         const data = await res.json();
         return data;
       }
@@ -48,7 +48,7 @@ const ProfileCard = () => {
           date,
         }
 
-      fetch(`http://localhost:5000/seller/verify_req`, {
+      fetch(`https://sell-zone-server.vercel.app/seller/verify_req`, {
         method: 'POST',
         headers: {
           'content-type' : 'application/json'

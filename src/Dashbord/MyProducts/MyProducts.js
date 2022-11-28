@@ -10,7 +10,7 @@ const MyProducts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/my_products/${user?.email}`, {
+    fetch(`https://sell-zone-server.vercel.app/my_products/${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
       }
@@ -25,7 +25,7 @@ const MyProducts = () => {
   const { data: advertise = [], refetch} = useQuery({
     queryKey: ["advertise"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/advertise/item`);
+      const res = await fetch(`https://sell-zone-server.vercel.app/advertise/item`);
       const data = await res.json();
       return data;
     },
@@ -42,7 +42,7 @@ const MyProducts = () => {
       productId: product._id
     }
 
-    fetch(`http://localhost:5000/advertise/add`, {
+    fetch(`https://sell-zone-server.vercel.app/advertise/add`, {
       method: 'POST',
       headers: {
         'content-type':'application/json'
@@ -52,7 +52,7 @@ const MyProducts = () => {
     .then(res => res.json())
     .then(data => {
       if(data.acknowledged){
-        fetch(`http://localhost:5000/advertise/start/${product._id}`, {
+        fetch(`https://sell-zone-server.vercel.app/advertise/start/${product._id}`, {
           method: 'PUT'
         })
         .then(res => res.json())
@@ -69,14 +69,14 @@ const MyProducts = () => {
   const handleStopAdvertise = (product) => {
     
     //Stop Advertise
-    fetch(`http://localhost:5000/advertise/stop/${product._id}`, {
+    fetch(`https://sell-zone-server.vercel.app/advertise/stop/${product._id}`, {
       method: 'PUT'
     })
     .then(res => res.json())
     .then(data => {
 
       //Delete advertise data from database
-        fetch(`http://localhost:5000/advertise/delete`, {
+        fetch(`https://sell-zone-server.vercel.app/advertise/delete`, {
         method: 'DELETE'
         })
         .then(res => res.json())

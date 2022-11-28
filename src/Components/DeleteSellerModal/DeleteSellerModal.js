@@ -5,7 +5,7 @@ const DeleteSellerModal = ({deleteSeller}) => {
 
     const handleDeleteSeller = seller => {
 
-        fetch(`http://localhost:5000/sellers/${seller._id}`, {
+        fetch(`https://sell-zone-server.vercel.app/sellers/${seller._id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())

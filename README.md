@@ -1,6 +1,10 @@
 ### Projects Descriptions
 
-# Sell Zone
+# Name : Sell Zone
+* Website Link : $ https://sell-zone-10e7e.web.app/
+* Depoyed Server Link: $ https://sell-zone-server.vercel.app/
+
+# --------------------------------------------
 
 project's features and functionalitie.............
 

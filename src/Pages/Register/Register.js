@@ -64,7 +64,7 @@ const Register = () => {
                     img: user.photoURL
                 }
                   //add user in database
-                    fetch(`http://localhost:5000/add_user`, {
+                    fetch(`https://sell-zone-server.vercel.app/add_user`, {
                       method:'POST',
                       headers:{
                           'content-type':'application/json'
@@ -93,7 +93,7 @@ const Register = () => {
                   }
 
                   //add user in database
-                  fetch(`http://localhost:5000/add_user`, {
+                  fetch(`https://sell-zone-server.vercel.app/add_user`, {
                     method:'POST',
                     headers:{
                         'content-type':'application/json'

@@ -17,7 +17,7 @@ const AddCartModal = ({phone}) => {
             id: phone._id,
         }
 
-        fetch(`http://localhost:5000/addCart` ,{
+        fetch(`https://sell-zone-server.vercel.app/addCart` ,{
             method: 'POST',
             headers: {
                 'content-type' : 'application/json'

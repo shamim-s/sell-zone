@@ -9,7 +9,7 @@ const ProductDeleteModal = ({ deleteProduct, refetch}) => {
         console.log(id);
 
         setLoading(true);
-        fetch(`http://localhost:5000/delete/${id}`, {
+        fetch(`https://sell-zone-server.vercel.app/delete/${id}`, {
             method: 'DELETE'
         })
         .then(res => res.json())
