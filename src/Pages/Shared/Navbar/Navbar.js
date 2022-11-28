@@ -55,7 +55,7 @@ const Navbar = () => {
               </li>
               }
               <li>
-                <Link to={'/all_phones'} className="font-semibold">BLOGS</Link>
+                <Link to={'/blogs'} className="font-semibold">BLOGS</Link>
               </li>
               <li>
                 {
@@ -85,7 +85,7 @@ const Navbar = () => {
               </li>
               }
               <li>
-                <Link to={'/all_phones'} className="font-semibold">BLOGS</Link>
+                <Link to={'/blogs'} className="font-semibold">BLOGS</Link>
               </li>
               <li>
                 {

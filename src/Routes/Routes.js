@@ -10,6 +10,7 @@ import VerifySellerRequest from "../Dashbord/VerifySellerRequest/VerifySellerReq
 import DashbordLayout from "../Layout/DashbordLayout";
 import Main from "../Layout/Main";
 import AllPhones from "../Pages/AllPhones/AllPhones";
+import Blogs from "../Pages/Blogs/Blogs";
 import CatagoryPhones from "../Pages/CatagoryPhones/CatagoryPhones";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes><CatagoryPhones/></PrivateRoutes>,
                 loader: ({params}) => 
                 fetch(`http://localhost:5000/phones/${params.cataId}`)
+            },
+            {
+                path: '/blogs',
+                element: <Blogs/>
             },
             {
                 path: '/login',
