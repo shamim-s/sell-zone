@@ -33,20 +33,9 @@ const AddProduct = () => {
         const sellPrice = data.sellPrice;
         const storage = data.storage;
         const used = data.usedMonth;
+        const location = data.location;
 
-        // const phone = {
-        //     cataId,
-        //     img,
-        //     seller,
-        //     model,
-        //     originalPrice,
-        //     sellPrice,
-        //     storage,
-        //     used,
-        //     postDate: date,
-        //     isVerified
-        // }
-        // console.log(phone);
+
         const formData = new FormData()
         formData.append('image', image)
 
@@ -67,6 +56,7 @@ const AddProduct = () => {
             model,
             originalPrice,
             sellPrice,
+            location,
             storage,
             used,
             postDate: date,

@@ -43,11 +43,11 @@ const PhoneDetails = () => {
           </h1>
           <hr className="mt-2 mb-4" />
           <p className="mb-2">
-            <span className="font-semibold">Original Price:</span>{" "}
+            <span className="font-semibold">Original Price:</span>
             {originalPrice} BDT
           </p>
           <p className="mb-2">
-            <span className="font-semibold">Selling Price:</span> {sellPrice}{" "}
+            <span className="font-semibold">Selling Price:</span>{sellPrice}
             BDT
           </p>
           <div className="mb-2 flex items-center">
@@ -58,13 +58,16 @@ const PhoneDetails = () => {
              }
           </div>
           <p className="mb-2">
-            <span className="font-semibold">Location:</span> {location}
+            <span className="font-semibold">Location:</span> 
+            {location}
           </p>
           <p className="mb-2">
-            <span className="font-semibold">Used:</span> {used}
+            <span className="font-semibold">Used:</span> 
+            {used}
           </p>
           <p className="mb-2">
-            <span className="font-semibold">Post Date:</span> {postDate}
+            <span className="font-semibold">Post Date:</span> 
+            {postDate}
           </p>
           <p className="mb-2">
             {
