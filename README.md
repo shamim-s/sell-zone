@@ -7,7 +7,7 @@
 * Admin Password: Alpha_7898@
 
 
-* client repo link: $ https://github.com/programming-hero-web-course-4/b612-used-products-resale-clients-side-shamim-s
+* client repo link: $ https://github.com/shamim-s/sell-zone-client
 
 * server repo link: $ https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-shamim-s
 # --------------------------------------------
