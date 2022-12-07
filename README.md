@@ -9,7 +9,7 @@
 
 * client repo link: $ https://github.com/shamim-s/sell-zone-client
 
-* server repo link: $ https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-shamim-s
+* server repo link: $ https://github.com/shamim-s/sell-zone-server
 # --------------------------------------------
 
 project's features and functionalitie.............
